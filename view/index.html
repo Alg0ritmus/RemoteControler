@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Skuska</title>
+</head>
+<body>
+    <!-- NICE BUTTONS -->
+
+    <div class ="frame">
+   
+        <a href="#" class="btn"  onclick="volumeUp()">
+        <i class="fas fa-plus"></i>
+        </a>
+
+        <a href="#" class="btn" onclick="buttonPlay()">
+        <i  id="pauseIcon" class="fas fa-play"></i>
+        </a>
+        
+        <a href="#" class="btn" onclick="volumeDown()">
+        <i class="fas fa-minus"></i>
+        </a>
+
+        <a href="#" onclick="buttonMuteAudio()" class="btn">
+        <i id="audioIcon" class="fas fa-volume-up"></i>
+        </a>
+      
+    </div>
+
+    <!-- END OF NICE BUTTONS -->
+
+   
+   
+</body>
+<script>
+    const socket = io('http://192.168.1.183:5500');
+    socket.on('connection');
+    
+    muteAudio=()=>{
+        socket.emit('muteAudio')
+    }
+
+    volumeUp=()=>{
+        socket.emit('volumeUp')
+    }
+
+
+    volumeDown=()=>{
+        socket.emit('volumeDown')
+    }
+
+
+    play=()=>{
+        socket.emit('play')
+    }
+
+    stop=()=>{
+        socket.emit('stop')
+    }
+
+    pause=()=>{
+        socket.emit('pause')
+    }
+
+    var toggleAudio = true;
+    var togglePlay = true;
+
+    buttonMuteAudio=()=>{
+        var icon = document.getElementById('audioIcon');
+        
+        if(toggleAudio==true){
+            toggleAudio=false;
+            icon.classList="fas fa-volume-mute";
+
+        }
+        else{
+            toggleAudio=true;
+            icon.classList="fas fa-volume-up";
+        }
+        muteAudio();
+    }
+
+    buttonPlay=()=>{
+        var icon = document.getElementById('pauseIcon');
+        if(togglePlay==true){
+            togglePlay=false;
+            pause();
+            icon.classList="fas fa-pause";
+        }
+        else{
+            togglePlay=true;
+            play();
+            icon.classList="fas fa-play";
+        }
+    }
+       
+
+</script>
+</html>
