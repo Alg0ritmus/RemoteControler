@@ -1,5 +1,6 @@
 DOCS for Remote Controller
-Change ip address in view/main.html file to your private IP add. (ipconfig for WsIN)
+
+Change ip address in view/main.html file to your private IP add. (ipconfig for WIN)
 
 Go to browser and serach for http://your.private.ip:5500/home
 
